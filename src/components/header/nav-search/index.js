@@ -21,22 +21,36 @@ import {
 class Nav extends Component {
   constructor(props) {
     super(props);
+    this.inputRef = React.createRef();
     this.state = {
       isFocusNavSearch: false,
-      isHoverSearchResult: false
+      isHoverSearchResult: false,
+      inputValue: '',
     }
-    this.handleSearchFocus = this.handleSearchFocus.bind(this);
-    this.handleSearchBlur = this.handleSearchBlur.bind(this);
-    this.handleSearchResEnter = this.handleSearchResEnter.bind(this);
-    this.handleSearchResLeave = this.handleSearchResLeave.bind(this);
   }
   handleSearchFocus = () => this.setState({isFocusNavSearch: true})
   handleSearchBlur = () => this.setState({isFocusNavSearch: false})
   handleSearchResEnter = () => this.setState({isHoverSearchResult: true})
   handleSearchResLeave = () => this.setState({isHoverSearchResult: false})
-
+  handleSearchInputChange = e => this.setState({inputValue: e.nativeEvent.target.value.trim()})
+  handleSearchInputKeyUp = e => {
+    if (e.key !== undefined) {
+      if (e.key === 'Enter'){
+        this.sendSearchKeyWord();
+      }
+    } else if (e.keyIdentifier !== undefined) {
+      if (e.key === 'Enter'){
+        this.sendSearchKeyWord();
+      }
+    } else if (e.keyCode !== undefined) {
+      if (e.key === 'Enter'){
+        this.sendSearchKeyWord();
+      }
+    }
+  }
   sendSearchKeyWord = () => {
-    console.log("sendSearchKeyWord");
+    // 1.异步请求
+    // 2.将字段存入历史记录中
   }
 
   isShowSearchResultBox() {
@@ -77,21 +91,24 @@ class Nav extends Component {
           classNames="slide"
         >
           <NavSearchInput
+            onKeyUp={this.handleSearchInputKeyUp}
+            onChange={this.handleSearchInputChange}
             onFocus={this.handleSearchFocus}
             onBlur={this.handleSearchBlur}
+            ref={this.inputRef}
             type="text"
             placeholder="搜索"
             maxLength="14"
           />
         </CSSTransition>
         <NavSearchBtn 
+          onMouseDown={this.sendSearchKeyWord}
           className={
             classnames(
               'iconfont icon-fangdajing',
               {'active': this.state.isFocusNavSearch}
             ) 
           }
-          onClick={this.sendSearchKeyWord}
         />
         {this.isShowSearchResultBox()}
       </NavSearchWrapper>
