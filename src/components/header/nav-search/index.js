@@ -30,31 +30,19 @@ class Nav extends Component {
     this.handleSearchResEnter = this.handleSearchResEnter.bind(this);
     this.handleSearchResLeave = this.handleSearchResLeave.bind(this);
   }
-  handleSearchFocus() {
-    this.setState({
-      isFocusNavSearch: true
-    });
-  }
-  handleSearchBlur() {
-    this.setState({
-      isFocusNavSearch: false
-    })
-  }
-  handleSearchResEnter() {
-    this.setState({
-      isHoverSearchResult: true
-    })
-  }
-  handleSearchResLeave() {
-    this.setState({
-      isHoverSearchResult: false
-    })
-  }
+  handleSearchFocus = () => this.setState({isFocusNavSearch: true})
+  handleSearchBlur = () => this.setState({isFocusNavSearch: false})
+  handleSearchResEnter = () => this.setState({isHoverSearchResult: true})
+  handleSearchResLeave = () => this.setState({isHoverSearchResult: false})
+
   sendSearchKeyWord = () => {
     console.log("sendSearchKeyWord");
   }
+
   isShowSearchResultBox() {
-    if ( !this.state.isFocusNavSearch && !this.state.isHoverSearchResult ) return null;
+    if ( !this.state.isFocusNavSearch && !this.state.isHoverSearchResult ) {
+      return null;
+    }
     return (
       <SearchResultBox
         onMouseEnter={this.handleSearchResEnter}
@@ -67,20 +55,10 @@ class Nav extends Component {
           </HotSearchTitle>
           <HotSearchList>
             <HotSearchListItem>理财</HotSearchListItem>
-            <HotSearchListItem>理财</HotSearchListItem>
-            <HotSearchListItem>理财</HotSearchListItem>
-            <HotSearchListItem>简书交友</HotSearchListItem>
-            <HotSearchListItem>理财</HotSearchListItem>
-            <HotSearchListItem>理财</HotSearchListItem>
           </HotSearchList>
         </HotSearch>
 
         <HistorySearchList>
-          <HistoryListItem >
-            <i className="iconfont">&#xe60e;</i>
-            <span>一条历史记录</span>
-            <i className="iconfont del-history-btn">&#xe62c;</i>
-          </HistoryListItem>
           <HistoryListItem >
             <i className="iconfont">&#xe60e;</i>
             <span>一条历史记录</span>
@@ -101,7 +79,9 @@ class Nav extends Component {
           <NavSearchInput
             onFocus={this.handleSearchFocus}
             onBlur={this.handleSearchBlur}
-            type="text" placeholder="搜索"
+            type="text"
+            placeholder="搜索"
+            maxLength="14"
           />
         </CSSTransition>
         <NavSearchBtn 

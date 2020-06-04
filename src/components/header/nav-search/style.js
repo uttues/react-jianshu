@@ -5,16 +5,13 @@ export const NavSearchWrapper = styled.div`
   position: relative;
 `
 
-export const NavSearchInput = styled.input.attrs({
-  type: 'text',
-  placeholder: '搜索'
-})`
+export const NavSearchInput = styled.input`
   box-sizing: border-box;
   width: 240px;
   height: 38px;
   line-height: 38px;
-  border: 1px solid #eee;
   border-radius: 19px;
+  border: 1px solid #eee;
   padding: 0 40px 0 20px;
   margin-left: 10px;
   font-size: 14px;
@@ -74,6 +71,7 @@ export const SearchResultBox = styled.div`
   width: 250px;
   border-radius: 4px;
   box-shadow: 0 0 8px rgba(0, 0, 0, .2);
+  filter: drop-shadow(0 0 8px rgba(0, 0, 0, .2));
   background: #fff;
   position: absolute;
   top: 47px;
@@ -82,6 +80,7 @@ export const SearchResultBox = styled.div`
   &:before {
     content: '';
     display: inline-block;
+    border-radius: 2px;
     border: 10px solid #fff;
     border-right: 10px solid transparent;
     border-bottom: 10px solid transparent;
@@ -93,8 +92,7 @@ export const SearchResultBox = styled.div`
 `
 
 export const HotSearch = styled.div`
-  padding: 20px;
-  padding-bottom: 10px;
+  padding: 20px 20px 10px;
   color: #adadad;
   border-bottom: 1px solid #e2e2e2;
 `
@@ -143,7 +141,7 @@ export const HistoryListItem = styled.a`
   position: relative;
   cursor: pointer;
 
-  span{
+  span {
     vertical-align: middle;
     display: inline-block;
     width: 150px;
@@ -156,7 +154,7 @@ export const HistoryListItem = styled.a`
     -o-text-overflow: ellipsis;
   }
 
-  i {
+  i.iconfont {
     vertical-align: middle;
     font-size: 20px;
     color: #a0a0a0;

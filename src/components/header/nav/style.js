@@ -22,7 +22,6 @@ export const NavLeftItem = styled.a`
     vertical-align: middle;
   }
 `
-//active-color: #EA6F5A
 
 export const NavRight = styled.div`
   display: flex;
