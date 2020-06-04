@@ -5,7 +5,7 @@ export const NavSearchWrapper = styled.div`
   position: relative;
 `
 
-export const NavSearch = styled.input.attrs({
+export const NavSearchInput = styled.input.attrs({
   type: 'text',
   placeholder: '搜索'
 })`
@@ -57,9 +57,9 @@ export const NavSearchBtn = styled.a`
   right: 5px;
   color: #999;
   cursor: pointer;
+  z-index: 3000;
 
   &:before {
-    display: inline-block;
     font-size: 17px;
     margin: auto;
   }

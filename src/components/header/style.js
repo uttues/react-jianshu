@@ -4,7 +4,6 @@ import LogoPic from '../../statics/nav-logo.png'
 export const HeaderWrapper = styled.div`
   box-sizing: border-box;
   background-color: #fff;
-  color: #333;
   border-bottom: 1px solid #f0f0f0;
 `
 

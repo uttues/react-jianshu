@@ -3,11 +3,9 @@ import NavSearch from '../nav-search'
 import {
   NavMainWrapper,
   NavLeftItem,
-
   NavRight,
   NavRightItem,
 } from './style'
-
 
 class Nav extends Component {
   render () {

@@ -3,14 +3,16 @@ import { CSSTransition } from 'react-transition-group'
 import classnames from 'classnames'
 import {
   NavSearchWrapper,
-  NavSearch,
+  NavSearchInput,
   NavSearchBtn,
+  
   SearchResultBox,
   HotSearch,
   HotSearchTitle,
   HotSearchSwitch,
   HotSearchList,
   HotSearchListItem,
+
   HistorySearchList,
   HistoryListItem,
 } from './style'
@@ -47,6 +49,9 @@ class Nav extends Component {
     this.setState({
       isHoverSearchResult: false
     })
+  }
+  sendSearchKeyWord = () => {
+    console.log("sendSearchKeyWord");
   }
   isShowSearchResultBox() {
     if ( !this.state.isFocusNavSearch && !this.state.isHoverSearchResult ) return null;
@@ -93,13 +98,21 @@ class Nav extends Component {
           timeout={400}
           classNames="slide"
         >
-          <NavSearch 
+          <NavSearchInput
             onFocus={this.handleSearchFocus}
             onBlur={this.handleSearchBlur}
             type="text" placeholder="搜索"
           />
         </CSSTransition>
-        <NavSearchBtn className={classnames('iconfont icon-fangdajing', {'active': this.state.isFocusNavSearch}) } />
+        <NavSearchBtn 
+          className={
+            classnames(
+              'iconfont icon-fangdajing',
+              {'active': this.state.isFocusNavSearch}
+            ) 
+          }
+          onClick={this.sendSearchKeyWord}
+        />
         {this.isShowSearchResultBox()}
       </NavSearchWrapper>
     )

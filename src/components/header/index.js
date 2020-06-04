@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 
 import Nav from './nav'
 import HeaderRightButtons from './header-right-btns'
@@ -24,20 +23,4 @@ class Header extends Component {
   }
 }
 
-
-const mapStateToProps = (state) => {
-  return {
-    searchList: state.searchList
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Header)
+export default Header;
