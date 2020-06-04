@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import * as actionCreators from '../../../store/actionCreators'
 import { CSSTransition } from 'react-transition-group'
 import classnames from 'classnames'
 import {
@@ -52,10 +53,32 @@ class NavSearch extends Component {
   sendSearchKeyWord = () => {
     // 1.异步请求
     // 2.将字段存入历史记录中
-    this.props.addHistorySearchList(this.state.inputValue.trim());
+    this.props.addHistorySearchItemHandler(this.state.inputValue.trim());
   }
-
-  isShowSearchResultBox() {
+  isShowHistoryList () {
+    if (this.props.historySearchList.length > 0) {
+      return (
+        <HistorySearchList>
+          {
+            this.props.historySearchList.map((item, index) => {
+              return (
+                <HistoryListItem key={index}>
+                  <i className="iconfont">&#xe60e;</i>
+                  <span>{item}</span>
+                  <i 
+                    className="iconfont del-history-btn" 
+                    onClick={index=>{this.props.deleteHistorySearchItemHandler(index)}}>
+                    &#xe62c;
+                  </i>
+                </HistoryListItem>
+              )
+            })
+          }
+        </HistorySearchList>
+      )
+    }
+  }
+  isShowSearchResultBox () {
     if ( !this.state.isFocusNavSearch && !this.state.isHoverSearchResult ) {
       return null;
     }
@@ -77,19 +100,7 @@ class NavSearch extends Component {
             }
           </HotSearchList>
         </HotSearch>
-        <HistorySearchList>
-          {
-            this.props.historySearchList.map((item, index) => {
-              return (
-                <HistoryListItem key={index}>
-                  <i className="iconfont">&#xe60e;</i>
-                  <span>{item}</span>
-                  <i className="iconfont del-history-btn">&#xe62c;</i>
-                </HistoryListItem>
-              )
-            })
-          }
-        </HistorySearchList>
+        {this.isShowHistoryList()}
       </SearchResultBox>
     )
   }
@@ -134,12 +145,12 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps =  (dispatch) => {
   return {
-    addHistorySearchList(inputValue) {
-      const action = {
-        type: 'add_history_search_item',
-        value: inputValue
-      }
+    addHistorySearchItemHandler (inputValue) {
+      const action = actionCreators.addHistorySearchItem(inputValue);
       dispatch(action);
+    },
+    deleteHistorySearchItemHandler (index) {
+      dispatch(actionCreators.deleteHistorySearchItem(index));
     }
   }
 }

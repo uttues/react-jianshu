@@ -1,6 +1,6 @@
 import {
   ADD_HISTORY_SEARCH_ITEM,
-  // DELETE_HISTORY_SEARCH_ITEM
+  DELETE_HISTORY_SEARCH_ITEM
 } from './actionTypes'
 import {
   HISTORY_SEARCH_LIST_MAX_LENGTH
@@ -29,6 +29,10 @@ export default (state = defaultState, action) => {
       }
       // 3.不论是否需要删除都会添加~
       newState.historySearchList = [ value, ...newState.historySearchList ];
+      return newState;
+    case DELETE_HISTORY_SEARCH_ITEM:
+      newState.historySearchList.splice(value, 1);
+      console.log(newState.historySearchList);
       return newState;
     default: 
       return state;
